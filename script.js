@@ -29,6 +29,7 @@ const videoList = [
 
 // Variabile per tenere traccia dell'ordine corrente
 let isAlphabeticalOrder = true; // Iniziamo con l'ordine alfabetico
+let currentVideoIndex = 0; // Indice del video corrente
 
 // Funzione per ordinare i video alfabeticamente
 function sortVideos() {
