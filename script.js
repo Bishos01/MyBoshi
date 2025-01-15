@@ -29,6 +29,8 @@ const videoList = [
 
 // Variabile per tenere traccia dell'ordine corrente
 let isAlphabeticalOrder = true; // Iniziamo con l'ordine alfabetico
+let player; // Variabile globale per il player YouTube
+let currentVideoIndex = 0; // Indice del video corrente
 
 // Funzione per ordinare i video alfabeticamente
 function sortVideos() {
@@ -102,26 +104,21 @@ function onYouTubeIframeAPIReady() {
             'onStateChange': onPlayerStateChange
         }
     });
-
-    loadVideoList(); // Carica la lista dei video ordinati
 }
 
-// Funzione per quando il player è pronto
+// Funzione chiamata quando il player è pronto
 function onPlayerReady(event) {
     event.target.playVideo();
 }
 
-// Funzione per gestire il cambiamento di stato del player
+// Funzione chiamata quando lo stato del player cambia
 function onPlayerStateChange(event) {
-    // Se il video è terminato (stato 0), carica il prossimo video
     if (event.data === YT.PlayerState.ENDED) {
-        currentVideoIndex = (currentVideoIndex + 1) % videoList.length; // Passa al prossimo video
-        loadVideo(currentVideoIndex); // Carica il prossimo video
+        // Passa al prossimo video quando il video corrente finisce
+        currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+        player.loadVideoById(videoList[currentVideoIndex].id);
     }
 }
 
-// Inizializza il player quando la pagina è pronta
-window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-
-// Ordina i video alfabeticamente all'avvio
-sortVideos();
+// Inizializza la lista dei video
+loadVideoList();
