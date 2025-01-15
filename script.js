@@ -1,4 +1,4 @@
-// Lista dei video (assumendo che tu abbia già una lista simile)
+// Lista dei video
 const videoList = [
     { id: "pmanD_s7G3U", title: "Demon Slayer" },
     { id: "fkAL_LeCsZs", title: "Dr. Stone" },
@@ -30,33 +30,33 @@ const videoList = [
     { id: "0Vwwr3VGsYg", title: "Re:Zero" }
 ];
 
-// Variabile per tenere traccia dell'ordine corrente
-let isAlphabeticalOrder = true; // Iniziamo con l'ordine alfabetico
-let currentVideoIndex = 0; // Indice del video corrente
-let player; // Variabile per il player YouTube
+// Variabili per tenere traccia dell'ordine e del video corrente
+let isAlphabeticalOrder = true;
+let currentVideoIndex = 0;
+let player;
 
 // Funzione per ordinare i video alfabeticamente
 function sortVideos() {
     videoList.sort((a, b) => a.title.localeCompare(b.title));
-    loadVideoList(); // Ricarica la lista dei video ordinati
+    loadVideoList();
 }
 
 // Funzione per randomizzare i video
 function randomizeVideos() {
     if (isAlphabeticalOrder) {
-        // Se i video sono in ordine alfabetico, li randomizziamo
         for (let i = videoList.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [videoList[i], videoList[j]] = [videoList[j], videoList[i]]; // Swap
         }
     } else {
-        // Se i video sono randomizzati, li riordiniamo alfabeticamente
         sortVideos();
     }
 
-    // Alterna lo stato
     isAlphabeticalOrder = !isAlphabeticalOrder;
-    loadVideoList(); // Ricarica la lista dei video dopo il cambiamento
+    loadVideoList();
+
+    const randomizeButton = document.getElementById('randomize-button');
+    randomizeButton.innerText = isAlphabeticalOrder ? "Randomize" : "Sort Alphabetically";
 }
 
 // Funzione per caricare la lista dei video
@@ -90,18 +90,25 @@ function loadVideo(index) {
 
     // Carica il video nel player YouTube
     player.loadVideoById(videoId);
-    currentVideoIndex = index; // Aggiorna l'indice del video corrente
+    currentVideoIndex = index;
+
+    // Animazione di transizione
+    const playerContainer = document.getElementById('player');
+    playerContainer.style.opacity = 0;
+    setTimeout(() => {
+        playerContainer.style.transition = "opacity 0.5s ease-in-out";
+        playerContainer.style.opacity = 1;
+    }, 200); // Leggera pausa prima di mostrare il video
 }
 
 // Funzione per creare il player YouTube
 function onYouTubeIframeAPIReady() {
-    // Assicurati che i video siano ordinati prima di iniziare a caricare il player
-    sortVideos(); // Ordina i video alfabeticamente
+    sortVideos(); // Ordina i video all'inizio
 
     player = new YT.Player('player', {
         height: '450',
         width: '800',
-        videoId: videoList[0].id, // Carica il primo video in ordine alfabetico
+        videoId: videoList[0].id, // Carica il primo video
         events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -111,24 +118,24 @@ function onYouTubeIframeAPIReady() {
     loadVideoList(); // Carica la lista dei video ordinati
 }
 
-// Funzione per quando il player è pronto
+// Funzione quando il player è pronto
 function onPlayerReady(event) {
     event.target.playVideo();
 }
 
 // Funzione per gestire il cambiamento di stato del player
 function onPlayerStateChange(event) {
-    // Se il video è terminato (stato 0), carica il prossimo video
+    // Se il video è terminato, carica il prossimo
     if (event.data === YT.PlayerState.ENDED) {
-        currentVideoIndex = (currentVideoIndex + 1) % videoList.length; // Passa al prossimo video
-        loadVideo(currentVideoIndex); // Carica il prossimo video
+        currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+        loadVideo(currentVideoIndex);
     }
 }
 
 // Inizializza il player quando la pagina è pronta
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-// Ordina i video alfabeticamente all'avvio
+// Ordina i video all'avvio
 sortVideos();
 
 // Aggiungi un listener per il pulsante di randomizzazione
