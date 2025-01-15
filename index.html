@@ -6,16 +6,25 @@
     <title>My Boshi</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
+
     <h1>My Boshi</h1>
-    <div id="player"></div> <!-- Questo è il div dove il player YouTube verrà caricato -->
-    <div id="video-list"></div> <!-- Lista dei video -->
+
+    <!-- Sezione del player YouTube -->
+    <div id="player"></div>
+
+    <!-- Contenitore del pulsante Randomize -->
     <div id="randomize-container">
-        <button id="randomize-button">Randomize</button> <!-- Pulsante per randomizzare l'ordine dei video -->
+        <button id="randomize-button" onclick="randomizeVideos()">Randomize</button>
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script> <!-- Carica l'API di YouTube -->
-    <script src="script.js"></script> <!-- Carica il file JavaScript che contiene la logica -->
+    <!-- Lista dei video -->
+    <div class="video-list" id="video-list">
+        <!-- I video verranno aggiunti dinamicamente qui -->
+    </div>
+
+    <script src="script.js"></script> <!-- Assicurati che il tuo script.js sia incluso -->
 </body>
 </html>

@@ -1,4 +1,4 @@
-// Lista dei video
+// Lista dei video (assumendo che tu abbia già una lista simile)
 const videoList = [
     { id: "pmanD_s7G3U", title: "Demon Slayer" },
     { id: "fkAL_LeCsZs", title: "Dr. Stone" },
@@ -24,16 +24,11 @@ const videoList = [
     { id: "SavhHnWla6c", title: "Naruto Shippuden" },
     { id: "WEN4qOcVKeM", title: "Bleach" },
     { id: "mjeR7vUrDvM", title: "Bleach" },
-    { id: "fFd1VkGc-SI", title: "Black Clover" },
-    { id: "C0zMWogztQs", title: "Solo Leveling 2" },
-    { id: "sYC5BfJy2nw", title: "The Apothecary Diaries 3" },
-    { id: "0Vwwr3VGsYg", title: "Re:Zero" }
+    { id: "fFd1VkGc-SI", title: "Black Clover" }
 ];
 
-// Variabile per il player YouTube
-let player;
-let isAlphabeticalOrder = true; // Ordine alfabetico iniziale
-let currentVideoIndex = 0; // Indice del video corrente
+// Variabile per tenere traccia dell'ordine corrente
+let isAlphabeticalOrder = true; // Iniziamo con l'ordine alfabetico
 
 // Funzione per ordinare i video alfabeticamente
 function sortVideos() {
@@ -44,17 +39,17 @@ function sortVideos() {
 // Funzione per randomizzare i video
 function randomizeVideos() {
     if (isAlphabeticalOrder) {
-        // Randomizza i video se sono in ordine alfabetico
+        // Se i video sono in ordine alfabetico, li randomizziamo
         for (let i = videoList.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [videoList[i], videoList[j]] = [videoList[j], videoList[i]]; // Swap
         }
     } else {
-        // Riordina alfabeticamente se i video sono già randomizzati
+        // Se i video sono randomizzati, li riordiniamo alfabeticamente
         sortVideos();
     }
 
-    // Alterna lo stato dell'ordine
+    // Alterna lo stato
     isAlphabeticalOrder = !isAlphabeticalOrder;
     loadVideoList(); // Ricarica la lista dei video dopo il cambiamento
 }
@@ -99,8 +94,8 @@ function onYouTubeIframeAPIReady() {
     sortVideos(); // Ordina i video alfabeticamente
 
     player = new YT.Player('player', {
-        height: '600', // Altezza del player aumentata
-        width: '100%', // Larghezza adattata
+        height: '450',
+        width: '800',
         videoId: videoList[0].id, // Carica il primo video in ordine alfabetico
         events: {
             'onReady': onPlayerReady,
@@ -130,6 +125,3 @@ window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
 // Ordina i video alfabeticamente all'avvio
 sortVideos();
-
-// Aggiungi un listener per il pulsante di randomizzazione
-document.getElementById('randomize-button').addEventListener('click', randomizeVideos);
