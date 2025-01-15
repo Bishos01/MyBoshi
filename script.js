@@ -30,10 +30,10 @@ const videoList = [
     { id: "0Vwwr3VGsYg", title: "Re:Zero" }
 ];
 
-// Variabile per tenere traccia dell'ordine corrente
-let isAlphabeticalOrder = true; // Iniziamo con l'ordine alfabetico
+// Variabile per il player YouTube
+let player;
+let isAlphabeticalOrder = true; // Ordine alfabetico iniziale
 let currentVideoIndex = 0; // Indice del video corrente
-let player; // Variabile per il player YouTube
 
 // Funzione per ordinare i video alfabeticamente
 function sortVideos() {
@@ -44,17 +44,17 @@ function sortVideos() {
 // Funzione per randomizzare i video
 function randomizeVideos() {
     if (isAlphabeticalOrder) {
-        // Se i video sono in ordine alfabetico, li randomizziamo
+        // Randomizza i video se sono in ordine alfabetico
         for (let i = videoList.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [videoList[i], videoList[j]] = [videoList[j], videoList[i]]; // Swap
         }
     } else {
-        // Se i video sono randomizzati, li riordiniamo alfabeticamente
+        // Riordina alfabeticamente se i video sono già randomizzati
         sortVideos();
     }
 
-    // Alterna lo stato
+    // Alterna lo stato dell'ordine
     isAlphabeticalOrder = !isAlphabeticalOrder;
     loadVideoList(); // Ricarica la lista dei video dopo il cambiamento
 }
@@ -83,42 +83,53 @@ function loadVideoList() {
     });
 }
 
-// Funzione per caricare un video nel player
+// Funzione per caricare il video nel player
 function loadVideo(index) {
     const video = videoList[index];
-    if (player) {
-        player.loadVideoById(video.id);
-    }
+    const videoId = video.id;
+
+    // Carica il video nel player YouTube
+    player.loadVideoById(videoId);
+    currentVideoIndex = index; // Aggiorna l'indice del video corrente
 }
 
 // Funzione per creare il player YouTube
 function onYouTubeIframeAPIReady() {
+    // Assicurati che i video siano ordinati prima di iniziare a caricare il player
+    sortVideos(); // Ordina i video alfabeticamente
+
     player = new YT.Player('player', {
-        height: '600', // Altezza aumentata a 600px
-        width: '800',  // Larghezza a 800px
-        videoId: videoList[currentVideoIndex].id,
+        height: '600', // Altezza del player aumentata
+        width: '100%', // Larghezza adattata
+        videoId: videoList[0].id, // Carica il primo video in ordine alfabetico
         events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
         }
     });
+
+    loadVideoList(); // Carica la lista dei video ordinati
 }
 
-// Funzione quando il player è pronto
+// Funzione per quando il player è pronto
 function onPlayerReady(event) {
     event.target.playVideo();
 }
 
 // Funzione per gestire il cambiamento di stato del player
 function onPlayerStateChange(event) {
+    // Se il video è terminato (stato 0), carica il prossimo video
     if (event.data === YT.PlayerState.ENDED) {
         currentVideoIndex = (currentVideoIndex + 1) % videoList.length; // Passa al prossimo video
         loadVideo(currentVideoIndex); // Carica il prossimo video
     }
 }
 
-// Carica la lista dei video al caricamento della pagina
-window.onload = loadVideoList;
+// Inizializza il player quando la pagina è pronta
+window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+// Ordina i video alfabeticamente all'avvio
+sortVideos();
 
 // Aggiungi un listener per il pulsante di randomizzazione
 document.getElementById('randomize-button').addEventListener('click', randomizeVideos);

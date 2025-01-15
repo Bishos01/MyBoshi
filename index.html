@@ -6,102 +6,16 @@
     <title>My Boshi</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Aggiungi alcune regole CSS di base per migliorare il layout */
-        body {
-            font-family: 'Noto Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-        }
-
-        h1 {
-            font-family: 'Bangers', cursive;
-            color: #333;
-            margin-top: 20px;
-        }
-
-        #player {
-            margin-top: 20px;
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        #video-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 15px;
-        }
-
-        .video-item {
-            width: 200px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .video-item:hover {
-            transform: scale(1.05);
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .video-title {
-            font-size: 16px;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        #randomize-container {
-            margin-top: 20px;
-        }
-
-        #randomize-button {
-            background-color: #ff6347;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        #randomize-button:hover {
-            background-color: #ff4500;
-        }
-
-        @media (max-width: 768px) {
-            .video-item {
-                width: 45%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .video-item {
-                width: 90%;
-            }
-        }
-    </style>
 </head>
 <body>
     <h1>My Boshi</h1>
-    <div id="player"></div>
-    <div id="video-list"></div>
+    <div id="player"></div> <!-- Questo è il div dove il player YouTube verrà caricato -->
+    <div id="video-list"></div> <!-- Lista dei video -->
     <div id="randomize-container">
-        <button id="randomize-button" onclick="randomizeVideos()">Randomize</button>
+        <button id="randomize-button">Randomize</button> <!-- Pulsante per randomizzare l'ordine dei video -->
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script> <!-- Carica l'API di YouTube -->
+    <script src="script.js"></script> <!-- Carica il file JavaScript che contiene la logica -->
 </body>
 </html>
