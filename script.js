@@ -1,4 +1,4 @@
-// Lista dei video (assumendo che tu abbia già una lista simile)
+// Lista dei video
 const videoList = [
     { id: "pmanD_s7G3U", title: "Demon Slayer" },
     { id: "fkAL_LeCsZs", title: "Dr. Stone" },
@@ -96,8 +96,25 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '600', // Altezza aumentata a 600px
         width: '800',  // Larghezza a 800px
-        videoId: videoList[currentVideoIndex].id
+        videoId: videoList[currentVideoIndex].id,
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
     });
+}
+
+// Funzione quando il player è pronto
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+// Funzione per gestire il cambiamento di stato del player
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        currentVideoIndex = (currentVideoIndex + 1) % videoList.length; // Passa al prossimo video
+        loadVideo(currentVideoIndex); // Carica il prossimo video
+    }
 }
 
 // Carica la lista dei video al caricamento della pagina
