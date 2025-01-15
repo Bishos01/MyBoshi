@@ -13,27 +13,53 @@ body {
     height: 100%;
 }
 
-/* Titolo principale */
+/* Titolo principale con effetto animato */
 h1 {
     font-family: 'Bangers', sans-serif;
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #FF77FF;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0 0 25px #FF77FF, 0 0 5px #FF77FF;
     margin-top: 50px;
     text-transform: uppercase;
     letter-spacing: 5px;
     margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out;
 }
 
-/* Sezione del player YouTube */
+/* Animazione del fadeInUp */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sezione del player YouTube con animazione */
 #player {
     margin: 30px auto;
     width: 80%;
     max-width: 800px;
     height: 450px;
     background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Aggiunto effetto ombra */
+    animation: slideIn 1s ease-out;
+}
+
+/* Animazione slideIn per il player */
+@keyframes slideIn {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Lista dei video */
@@ -47,31 +73,49 @@ h1 {
     list-style: none;
 }
 
-/* Elemento video */
+/* Elemento video con animazione */
 .video-item {
     position: relative;
-    width: 200px;
+    width: 250px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Aggiunta ombra */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombra di base */
+    animation: fadeInUp 0.8s ease-out;
 }
 
-/* Thumbnail del video */
+/* Animazione di fadeInUp per gli elementi video */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Thumbnail del video con effetto zoom */
 .video-thumbnail {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;
+    transition: transform 0.4s ease;
 }
 
-/* Effetto al passaggio del mouse */
+/* Effetto hover con zoom e ombra */
+.video-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Ombra più intensa */
+}
+
 .video-item:hover .video-thumbnail {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Zoom all'immagine */
 }
 
-/* Titolo del video */
+/* Titolo del video con effetto di scrittura */
 .video-item p {
     position: absolute;
     bottom: 10px;
@@ -79,7 +123,7 @@ h1 {
     width: 100%;
     padding: 10px;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: transparent; /* Inizialmente il testo è invisibile */
     background: rgba(0, 0, 0, 0.5);
@@ -88,7 +132,19 @@ h1 {
     backdrop-filter: blur(5px); /* Effetto glassmorphism */
     opacity: 0; /* Inizialmente il titolo è invisibile */
     visibility: hidden; /* Il titolo non è visibile */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Transizione per l'effetto di apparizione */
+    animation: textAppear 0.6s ease forwards;
+}
+
+/* Animazione per far apparire il testo del titolo */
+@keyframes textAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Titolo visibile al passaggio del mouse */
@@ -99,23 +155,43 @@ h1 {
     text-shadow: 0 0 20px #FF77FF, 0 0 30px #FF77FF; /* Effetto glow con colore del titolo */
 }
 
-/* Effetto hover sui titoli */
-.video-item:hover p {
-    background: rgba(0, 0, 0, 0.7);
+/* Bottone Randomize con animazione */
+#randomize-button {
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo semitrasparente per effetto glass */
+    color: #FF77FF;
+    font-family: 'Bangers', sans-serif;
+    font-size: 1.5rem;
+    border: 3px solid #FF77FF; /* Bordo luminoso */
+    padding: 15px 30px;
+    border-radius: 50px; /* Angoli arrotondati */
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Leggera ombra */
+    backdrop-filter: blur(8px); /* Effetto blur dietro il bottone */
+    position: relative; /* Posizione per aggiungere effetti interattivi */
+    z-index: 1; /* Assicura che il bottone sia sopra altri elementi */
+    animation: fadeInUp 1s ease-out;
 }
 
-/* Responsive design per schermi piccoli */
+/* Effetto hover con animazione */
+#randomize-button:hover {
+    background-color: rgba(255, 119, 255, 0.3); /* Aumento della visibilità al passaggio del mouse */
+    color: white;
+    text-shadow: 0 0 15px #fff, 0 0 30px #ff77ff, 0 0 10px #ff77ff; /* Effetto glow */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); /* Ombra più forte per effetto hover */
+    transform: scale(1.1); /* Leggero ingrandimento per effetto interattivo */
+}
+
+/* Effetto attivo sul pulsante (click) */
+#randomize-button:active {
+    transform: scale(0.98); /* Rimpicciolimento al clic per effetto di pressione */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombra ridotta quando il bottone è cliccato */
+}
+
+/* Media queries per schermi più piccoli */
 @media (max-width: 768px) {
-    .video-list {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .video-item {
-        width: 90%;
-        margin-bottom: 20px;
-    }
-
     h1 {
         font-size: 2rem; /* Ridotto per schermi più piccoli */
         margin-top: 30px;
@@ -126,63 +202,13 @@ h1 {
         height: 300px; /* Ridotto per schermi più piccoli */
     }
 
+    .video-item {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
     #randomize-button {
         font-size: 1.2rem;
         padding: 12px 25px;
     }
-}
-
-/* Contenitore del pulsante Randomize */
-#randomize-container {
-    display: flex;
-    justify-content: center; /* Centra il bottone */
-    margin-top: 20px; /* Distanza tra il player e il bottone */
-}
-
-/* Bottone Randomize con effetto Glassmorphism completo */
-#randomize-button {
-    background-color: rgba(255, 255, 255, 0.1); /* Sfondo semitrasparente per effetto glass */
-    color: #FF77FF;
-    font-family: 'Bangers', sans-serif;
-    font-size: 1.5rem;
-    border: 3px solid #FF77FF; /* Bordo luminoso */
-    padding: 15px 30px;
-    border-radius: 50px; /* Angoli arrotondati */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Leggera ombra */
-    backdrop-filter: blur(8px); /* Effetto blur dietro il bottone */
-    position: relative; /* Posizione per aggiungere effetti interattivi */
-    z-index: 1; /* Assicura che il bottone sia sopra altri elementi */
-}
-
-/* Aggiunta di un overlay per effetto glassmorphism */
-#randomize-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2); /* Sfondo scuro per un effetto di profondità */
-    border-radius: 50px;
-    z-index: -1; /* Mette l'overlay dietro al bottone */
-    backdrop-filter: blur(10px); /* Blur aggiuntivo per migliorare l'effetto glass */
-}
-
-/* Effetto hover sul pulsante */
-#randomize-button:hover {
-    background-color: rgba(255, 119, 255, 0.3); /* Aumento della visibilità al passaggio del mouse */
-    color: white;
-    text-shadow: 0 0 15px #fff, 0 0 30px #ff77ff, 0 0 10px #ff77ff; /* Effetto glow */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); /* Ombra più forte per effetto hover */
-    transform: scale(1.05); /* Leggero ingrandimento per effetto interattivo */
-}
-
-/* Effetto attivo sul pulsante (click) */
-#randomize-button:active {
-    transform: scale(0.98); /* Rimpicciolimento al clic per effetto di pressione */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombra ridotta quando il bottone è cliccato */
 }
