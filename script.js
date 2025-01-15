@@ -24,12 +24,16 @@ const videoList = [
     { id: "SavhHnWla6c", title: "Naruto Shippuden" },
     { id: "WEN4qOcVKeM", title: "Bleach" },
     { id: "mjeR7vUrDvM", title: "Bleach" },
-    { id: "fFd1VkGc-SI", title: "Black Clover" }
+    { id: "fFd1VkGc-SI", title: "Black Clover" },
+    { id: "C0zMWogztQs", title: "Solo Leveling 2" },
+    { id: "sYC5BfJy2nw", title: "The Apothecary Diaries 3" },
+    { id: "0Vwwr3VGsYg", title: "Re:Zero" }
 ];
 
 // Variabile per tenere traccia dell'ordine corrente
 let isAlphabeticalOrder = true; // Iniziamo con l'ordine alfabetico
 let currentVideoIndex = 0; // Indice del video corrente
+let player; // Variabile per il player YouTube
 
 // Funzione per ordinare i video alfabeticamente
 function sortVideos() {
@@ -126,3 +130,6 @@ window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
 // Ordina i video alfabeticamente all'avvio
 sortVideos();
+
+// Aggiungi un listener per il pulsante di randomizzazione
+document.getElementById('randomize-button').addEventListener('click', randomizeVideos);

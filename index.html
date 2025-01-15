@@ -3,28 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Boshi</title>
+    <title>Video Player</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
-
-    <h1>My Boshi</h1>
-
-    <!-- Sezione del player YouTube -->
+    <h1>Video Player</h1>
     <div id="player"></div>
-
-    <!-- Contenitore del pulsante Randomize -->
+    <div id="video-list"></div>
     <div id="randomize-container">
         <button id="randomize-button" onclick="randomizeVideos()">Randomize</button>
     </div>
 
-    <!-- Lista dei video -->
-    <div class="video-list" id="video-list">
-        <!-- I video verranno aggiunti dinamicamente qui -->
-    </div>
-
-    <script src="script.js"></script> <!-- Assicurati che il tuo script.js sia incluso -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
 </body>
 </html>

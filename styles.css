@@ -1,15 +1,15 @@
 /* Corpo della pagina con immagine di sfondo */
 body {
-    background-image: url('https://images3.alphacoders.com/133/thumb-1920-1338576.jpeg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-    color: white; 
+    background-image: url('https://images3.alphacoders.com/133/thumb-1920-1338576.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
     font-family: 'Noto Sans', sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
-    overflow: auto; /* Rende la pagina scrollabile */
+    overflow: auto;
     height: 100%;
 }
 
@@ -33,7 +33,7 @@ h1 {
     height: 450px;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Aggiunto effetto ombra */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Lista dei video */
@@ -55,7 +55,7 @@ h1 {
     transition: transform 0.3s ease-in-out;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Aggiunta ombra */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Thumbnail del video */
@@ -81,27 +81,61 @@ h1 {
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
-    color: transparent; /* Inizialmente il testo è invisibile */
+    color: transparent;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px); /* Effetto glassmorphism */
-    opacity: 0; /* Inizialmente il titolo è invisibile */
-    visibility: hidden; /* Il titolo non è visibile */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Transizione per l'effetto di apparizione */
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 /* Titolo visibile al passaggio del mouse */
 .video-item:hover p {
     opacity: 1;
-    visibility: visible; /* Rende il titolo visibile */
-    color: #FF77FF; /* Colore del titolo uguale a quello del video player */
-    text-shadow: 0 0 20px #FF77FF, 0 0 30px #FF77FF; /* Effetto glow con colore del titolo */
+    visibility: visible;
+    color: #FF77FF;
+    text-shadow: 0 0 20px #FF77FF, 0 0 30px #FF77FF;
 }
 
-/* Effetto hover sui titoli */
-.video-item:hover p {
-    background: rgba(0, 0, 0, 0.7);
+/* Contenitore del pulsante Randomize */
+#randomize-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Bottone Randomize con effetto Glassmorphism completo */
+#randomize-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FF77FF;
+    font-family: 'Bangers', sans-serif;
+    font-size: 1.5rem;
+    border: 3px solid #FF77FF;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+/* Effetto hover sul pulsante */
+#randomize-button:hover {
+    background-color: rgba(255, 119, 255, 0.3);
+    color: white;
+    text-shadow: 0 0 15px #fff, 0 0 30px #ff77ff, 0 0 10px #ff77ff;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+/* Effetto attivo sul pulsante (click) */
+#randomize-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive design per schermi piccoli */
@@ -117,72 +151,17 @@ h1 {
     }
 
     h1 {
-        font-size: 2rem; /* Ridotto per schermi più piccoli */
+        font-size: 2rem;
         margin-top: 30px;
     }
 
     #player {
         width: 90%;
-        height: 300px; /* Ridotto per schermi più piccoli */
+        height: 300px;
     }
 
     #randomize-button {
         font-size: 1.2rem;
         padding: 12px 25px;
     }
-}
-
-/* Contenitore del pulsante Randomize */
-#randomize-container {
-    display: flex;
-    justify-content: center; /* Centra il bottone */
-    margin-top: 20px; /* Distanza tra il player e il bottone */
-}
-
-/* Bottone Randomize con effetto Glassmorphism completo */
-#randomize-button {
-    background-color: rgba(255, 255, 255, 0.1); /* Sfondo semitrasparente per effetto glass */
-    color: #FF77FF;
-    font-family: 'Bangers', sans-serif;
-    font-size: 1.5rem;
-    border: 3px solid #FF77FF; /* Bordo luminoso */
-    padding: 15px 30px;
-    border-radius: 50px; /* Angoli arrotondati */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Leggera ombra */
-    backdrop-filter: blur(8px); /* Effetto blur dietro il bottone */
-    position: relative; /* Posizione per aggiungere effetti interattivi */
-    z-index: 1; /* Assicura che il bottone sia sopra altri elementi */
-}
-
-/* Aggiunta di un overlay per effetto glassmorphism */
-#randomize-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2); /* Sfondo scuro per un effetto di profondità */
-    border-radius: 50px;
-    z-index: -1; /* Mette l'overlay dietro al bottone */
-    backdrop-filter: blur(10px); /* Blur aggiuntivo per migliorare l'effetto glass */
-}
-
-/* Effetto hover sul pulsante */
-#randomize-button:hover {
-    background-color: rgba(255, 119, 255, 0.3); /* Aumento della visibilità al passaggio del mouse */
-    color: white;
-    text-shadow: 0 0 15px #fff, 0 0 30px #ff77ff, 0 0 10px #ff77ff; /* Effetto glow */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); /* Ombra più forte per effetto hover */
-    transform: scale(1.05); /* Leggero ingrandimento per effetto interattivo */
-}
-
-/* Effetto attivo sul pulsante (click) */
-#randomize-button:active {
-    transform: scale(0.98); /* Rimpicciolimento al clic per effetto di pressione */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombra ridotta quando il bottone è cliccato */
 }
